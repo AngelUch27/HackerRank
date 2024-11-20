@@ -1,0 +1,53 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import re
+import sys
+
+
+def separar(cadena, letra):
+    
+    res = re.sub(r'([A-Z])', r' \1', cadena).strip()
+    if letra == 'M':
+        return res.lower()[:-2]
+    return res.lower()
+
+
+def unir(cadena, letra):
+    cadNueva = ""
+    for i in range(len(cadena)):
+        if letra == 'C' and cadNueva == "":
+            cadNueva += cadena[i].upper()
+        
+        elif cadena[i] == ' ':
+            cadNueva += ''
+            
+        elif cadena[i-1] == ' ':
+            cadNueva += cadena[i].upper()
+            
+            
+        else:
+            cadNueva+=cadena[i]
+            
+    if letra == 'M':
+        cadNueva += '()'
+    
+    return cadNueva.replace(" ", "")
+    
+resFinal = ""
+res = ""
+
+
+for linea in sys.stdin:
+    linea = linea.strip()
+    if not linea:
+        continue
+    
+
+    cadFinal = linea[4:]
+    
+    if linea[0] == 'S':
+        res = separar(cadFinal,linea[2])
+
+    elif linea[0] == 'C':
+        res = unir(cadFinal, linea[2])
+    
+    print(res)
