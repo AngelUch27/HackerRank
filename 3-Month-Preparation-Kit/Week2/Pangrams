@@ -1,0 +1,42 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'pangrams' function below.
+#
+# The function is expected to return a STRING.
+# The function accepts STRING s as parameter.
+#
+
+def pangrams(s):
+    # Write your code here
+    abc = 'qwertyuioplkjhgfdsazxcvbnm'
+    auxabc = ''
+    total = len(abc)
+    s=s.lower()
+    for letra in abc:
+        if letra in s and letra not in auxabc:
+            total -=1
+            auxabc +=letra
+    if total == 0:
+        return 'pangram'
+    else:
+         return 'not pangram'
+        
+        
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s = input()
+
+    result = pangrams(s)
+
+    fptr.write(result + '\n')
+
+    fptr.close()
